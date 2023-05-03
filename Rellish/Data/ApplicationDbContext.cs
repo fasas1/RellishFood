@@ -9,6 +9,7 @@ namespace Rellish.Data
         public ApplicationDbContext(DbContextOptions options) : base(options) { }
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<MenuItem> MenuItems { get; set; }
     }
 
  

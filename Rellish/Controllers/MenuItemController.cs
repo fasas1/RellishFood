@@ -48,7 +48,6 @@ namespace Rellish.Controllers
         }
 
         [HttpPost]
-
         public async Task<ActionResult<ApiResponse>> CreateMenuItem([FromBody]MenuItemCreateDTO menuItemCreateDTO)
         {
             try
@@ -71,6 +70,50 @@ namespace Rellish.Controllers
                     _response.Result = menuItemToCreate;
                     _response.StatusCode = HttpStatusCode.Created;
                     return CreatedAtRoute("GetMenuItem", new {id = menuItemToCreate.Id}, _response);
+
+
+                //else
+                //{
+                //    _response.IsSuccess = false;
+                //}
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string> { ex.Message };
+            }
+            return _response;
+        }
+
+        [HttpPut("{id:int}", Name = "GetMenuItem")]
+        public async Task<ActionResult<ApiResponse>> UpdateMenuItem(int id,[FromBody] MenuItemUpdateDTO menuItemUpdateDTO)
+        {
+            try
+            {
+                if (menuItemUpdateDTO == null || id != menuItemUpdateDTO.Id)
+                {
+                    return BadRequest();
+                }
+                MenuItem menuItemFromDb = await _db.MenuItems.FindAsync(id);
+                if (menuItemFromDb == null)
+                {
+                    return BadRequest();
+                }
+
+              
+                {
+                    menuItemFromDb.Name = menuItemUpdateDTO.Name;
+                    menuItemFromDb.Price = menuItemUpdateDTO.Price;
+                    menuItemFromDb.Category = menuItemUpdateDTO.Category;
+                    menuItemFromDb.SpecialTag = menuItemUpdateDTO.SpecialTag;
+                    menuItemFromDb.Image = menuItemUpdateDTO.Image;
+                    menuItemFromDb.Description = menuItemUpdateDTO.Description;
+                };
+                 _db.MenuItems.Update(menuItemFromDb);
+                 _db.SaveChanges();
+                
+                _response.StatusCode = HttpStatusCode.NoContent;
+                return Ok(_response);
 
 
                 //else

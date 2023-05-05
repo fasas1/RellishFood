@@ -13,6 +13,6 @@ namespace Rellish.Models.DTO
         [Range(1, int.MaxValue)]
         public double Price { get; set; }
         public string Image { get; set; }
-        public int Length { get; internal set; }
+     
     }
 }

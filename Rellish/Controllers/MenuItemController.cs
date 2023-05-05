@@ -53,34 +53,32 @@ namespace Rellish.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    if (menuItemCreateDTO == null || menuItemCreateDTO.Length == 0)
+                    if (menuItemCreateDTO == null )
                     {
-                        return BadRequest();
+                        return BadRequest(menuItemCreateDTO);
                     }
-                    MenuItem menuItemToCreate = new ()
+                    MenuItem menuItemToCreate = new()
                     {
                         Name= menuItemCreateDTO.Name,
                         Price= menuItemCreateDTO.Price,
                         Category= menuItemCreateDTO.Category,
                         SpecialTag= menuItemCreateDTO.SpecialTag,
                         Image = menuItemCreateDTO.Image,
-                        Description = menuItemCreateDTO.Description,
-                      
+                        Description = menuItemCreateDTO.Description     
                 };
-                    _db.MenuItems.Add(menuItemToCreate);
-                    _db.SaveChanges();
+                    await _db.MenuItems.AddAsync(menuItemToCreate);
+                   await _db.SaveChangesAsync();
                     _response.Result = menuItemToCreate;
                     _response.StatusCode = HttpStatusCode.Created;
                     return CreatedAtRoute("GetMenuItem", new {id = menuItemToCreate.Id}, _response);
-                }
-                else
-                {
-                    _response.IsSuccess = false;
-                }
+
+
+                //else
+                //{
+                //    _response.IsSuccess = false;
+                //}
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _response.IsSuccess = false;
                 _response.ErrorMessages = new List<string> { ex.Message };

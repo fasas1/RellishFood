@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Rellish.Data;
 using Rellish.Models;
+using Rellish.Models.DTO;
 using System.Net;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Rellish.Controllers
 {
@@ -19,7 +21,6 @@ namespace Rellish.Controllers
         }
 
         [HttpGet]
-
         public async Task<IActionResult> GetMenuItems()
         {
             _response.Result = _db.MenuItems;
@@ -27,7 +28,7 @@ namespace Rellish.Controllers
              return Ok(_response);
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet("{id:int}", Name="GetMenuItem")]
         public async Task<IActionResult> GetMenuItem(int id)
         { 
             if(id == 0)
@@ -44,6 +45,47 @@ namespace Rellish.Controllers
             _response.Result = menuItem;
             _response.StatusCode = HttpStatusCode.OK;
             return Ok(_response);
+        }
+
+        [HttpPost]
+
+        public async Task<ActionResult<ApiResponse>> CreateMenuItem([FromBody]MenuItemCreateDTO menuItemCreateDTO)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    if (menuItemCreateDTO == null || menuItemCreateDTO.Length == 0)
+                    {
+                        return BadRequest();
+                    }
+                    MenuItem menuItemToCreate = new ()
+                    {
+                        Name= menuItemCreateDTO.Name,
+                        Price= menuItemCreateDTO.Price,
+                        Category= menuItemCreateDTO.Category,
+                        SpecialTag= menuItemCreateDTO.SpecialTag,
+                        Image = menuItemCreateDTO.Image,
+                        Description = menuItemCreateDTO.Description,
+                      
+                };
+                    _db.MenuItems.Add(menuItemToCreate);
+                    _db.SaveChanges();
+                    _response.Result = menuItemToCreate;
+                    _response.StatusCode = HttpStatusCode.Created;
+                    return CreatedAtRoute("GetMenuItem", new {id = menuItemToCreate.Id}, _response);
+                }
+                else
+                {
+                    _response.IsSuccess = false;
+                }
+            }
+            catch(Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string> { ex.Message };
+            }
+            return _response;
         }
     }
 }

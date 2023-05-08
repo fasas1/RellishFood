@@ -29,11 +29,50 @@ namespace Rellish.Controllers
             _userManager = userManager;
         }
 
-        [HttpPost("register")]
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequestDTO model)
+        {
+            ApplicationUser userFromDb = _db.ApplicationUsers.FirstOrDefault
+                (u => u.UserName.ToLower() == model.UserName.ToLower());
+
+            bool isValid = await _userManager.CheckPasswordAsync(userFromDb, model.Password);
+
+
+            if (isValid == false )
+            {
+                _response.Result = new LoginRequestDTO();
+                _response.StatusCode = HttpStatusCode.BadRequest;
+                _response.IsSuccess = false;
+                _response.ErrorMessages.Add("Username already Exixts!");
+                return BadRequest(_response);
+            }
+            //Generate JWT Token
+            LoginResponseDTO loginResponse = new()
+            {
+                Email = userFromDb.Email,
+                Token = "REPLACE WITH ACTUAL TOKEN"
+            };
+
+            if (loginResponse.Email == null || string.IsNullOrEmpty(loginResponse.Token))
+            {
+                _response.StatusCode = HttpStatusCode.BadRequest;
+                _response.IsSuccess = false;
+                _response.ErrorMessages.Add("Username or Password already Exixts!");
+                return BadRequest(_response);
+            }
+            _response.StatusCode = HttpStatusCode.OK;
+            _response.IsSuccess = true;
+            _response.Result = loginResponse;
+            return Ok(_response);
+        }
+
+            [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDTO model)
         {
             ApplicationUser userFromDb = _db.ApplicationUsers.FirstOrDefault
                 (u => u.UserName.ToLower() == model.UserName.ToLower());
+
+          
 
             if(userFromDb != null)
             {

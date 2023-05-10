@@ -51,7 +51,8 @@ builder.Services.AddSwaggerGen(options =>
     options.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new Microsoft.OpenApi.Models.OpenApiSecurityScheme{
          Description =
           "JWT Authorization header using the bearer scheme. \r\n\r\n " +
-          "Enter 'Bearer' [space] and then your token in your text input",
+          "Enter 'Bearer' [space] and then your token in your text input below \r\n\r\n " +
+          "Example: \"Bearer 1234abcdef\"",
          Name = "Authorization",
          In = ParameterLocation.Header,
          Scheme= JwtBearerDefaults.AuthenticationScheme,

@@ -20,8 +20,36 @@ namespace Rellish.Controllers
             _db = db;
         }
 
-        [HttpPost]
+        [HttpGet]
+        public async Task<ActionResult<ApiResponse>> GetShoppingCart(string userId)
+        {
+            try
+            {
+              if(string.IsNullOrEmpty(userId))
+                {
+                    _response.IsSuccess = false;
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    return BadRequest(_response);
+                }
+                ShoppingCart shoppingCart= _db.ShoppingCarts
+                    .Include(u => u.CartItems)
+                    .ThenInclude(u => u.MenuItem).FirstOrDefault(u => u.UserId == userId);
 
+                _response.Result = shoppingCart;
+                _response.StatusCode = HttpStatusCode.OK;
+                return Ok(_response);
+            }
+            catch(Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
+                _response.StatusCode = HttpStatusCode.BadRequest;
+            }
+            return _response;
+        }
+
+
+        [HttpPost]
         public async Task<ActionResult<ApiResponse>> AddOrUpdateItemInCart(string userId, int menuItemId, int updateQuantityBy)
         {
             ShoppingCart shoppingCart = _db.ShoppingCarts.Include(u => u.CartItems).FirstOrDefault(u => u.UserId == userId);

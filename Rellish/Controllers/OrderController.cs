@@ -170,6 +170,10 @@ namespace Rellish.Controllers
                 {
                     orderFromDb.StripePaymentIntentId = orderHeaderUpdateDTO.StripePaymentIntentId;
                 }
+                _db.SaveChanges();
+                _response.StatusCode = HttpStatusCode.NoContent;
+                _response.IsSuccess = true;
+                return Ok(_response);
             }
             catch(Exception ex)
             {
@@ -177,10 +181,7 @@ namespace Rellish.Controllers
                 _response.ErrorMessages =
                     new List<string>() { ex.ToString() };
             }
-            _db.SaveChanges();
-            _response.StatusCode = HttpStatusCode.NoContent;
-            _response.IsSuccess = true;
-            return Ok(_response);
+             return _response;
         }
     }
 }

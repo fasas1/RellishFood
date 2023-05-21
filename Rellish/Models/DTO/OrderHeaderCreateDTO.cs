@@ -13,11 +13,10 @@ namespace Rellish.Models.DTO
         [Required]
         public string PickUpEmail { get; set; }
         public string ApplicationUserId { get; set; }
-       
         public double OrderTotal { get; set; }
 
 
-        public int StripePaymentIntentId { get; set; }
+        public string StripePaymentIntentId { get; set; }
         public string Status { get; set; }
         public int TotalItems { get; set; }
 

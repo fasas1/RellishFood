@@ -20,7 +20,7 @@ namespace Rellish.Models
 
 
         public DateTime OrderDate { get; set; }
-        public int StripePaymentIntentId { get; set; }
+        public string StripePaymentIntentId { get; set; }
         public string Status { get; set; }
         public int TotalItems { get; set; }
 

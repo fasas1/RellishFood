@@ -5,13 +5,15 @@ namespace Rellish.Models.DTO
 {
     public class OrderDetailsCreateDTO
     {
+        
         [Required]
-        public MenuItem MenuItem { get; set; }
+        public int MenuItemId { get;  set; }
         [Required]
         public int Quantity { get; set; }
         [Required]
         public string ItemName { get; set; }
         [Required]
         public double Price { get; set; }
+       
     }
 }

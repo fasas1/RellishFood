@@ -137,7 +137,39 @@ namespace Rellish.Controllers
         {
             try
             {
-               if(orderHeaderUpdateDTO == null )
+               if(orderHeaderUpdateDTO == null || id !=  orderHeaderUpdateDTO.OrderHeaderId)
+                {
+                    _response.IsSuccess = false;
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    return BadRequest();
+                }
+                  OrderHeader orderFromDb = _db.OrderHeaders.FirstOrDefault(u => u.OrderHeaderId == id);
+                if (orderFromDb == null)
+                {
+                    _response.IsSuccess = false;
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    return BadRequest();
+                }
+                if(!string.IsNullOrEmpty(orderHeaderUpdateDTO.PickUpName))
+                {
+                    orderFromDb.PickUpName = orderHeaderUpdateDTO.PickUpName;
+                }
+                if (!string.IsNullOrEmpty(orderHeaderUpdateDTO.PickUpPhoneNumber))
+                {
+                    orderFromDb.PickUpPhoneNumber = orderHeaderUpdateDTO.PickUpPhoneNumber;
+                }
+                if (!string.IsNullOrEmpty(orderHeaderUpdateDTO.PickUpEmail))
+                {
+                    orderFromDb.PickUpEmail = orderHeaderUpdateDTO.PickUpEmail;
+                }
+                if (!string.IsNullOrEmpty(orderHeaderUpdateDTO.Status))
+                {
+                    orderFromDb.Status = orderHeaderUpdateDTO.Status;
+                }
+                if (!string.IsNullOrEmpty(orderHeaderUpdateDTO.StripePaymentIntentId))
+                {
+                    orderFromDb.StripePaymentIntentId = orderHeaderUpdateDTO.StripePaymentIntentId;
+                }
             }
             catch(Exception ex)
             {
@@ -145,6 +177,10 @@ namespace Rellish.Controllers
                 _response.ErrorMessages =
                     new List<string>() { ex.ToString() };
             }
+            _db.SaveChanges();
+            _response.StatusCode = HttpStatusCode.NoContent;
+            _response.IsSuccess = true;
+            return Ok(_response);
         }
     }
 }

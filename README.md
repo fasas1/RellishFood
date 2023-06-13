@@ -21,7 +21,7 @@
 . Entity Framework Core
 . JSON Web Token and Identity
 
-- [![Capture 22](https://github.com/fasas1/RellishAPI/assets/47166372/14cfe558-a369-4e6a-926e-1ab3983e6d20)](https://github.com/fasas1/RellishFood/issues/1#issue-1754750019)
+- [!(https://github.com/fasas1/RellishAPI/assets/47166372/14cfe558-a369-4e6a-926e-1ab3983e6d20)]
 
 # Getting Started
 ### To set up and run the Restaurant Web API project on your local machine.

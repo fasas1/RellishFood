@@ -1,6 +1,24 @@
 # RellishAPI
-## A Restaurant WebApi where user can order from the menu and make payment. The project aims to develop a RESTful API for managing restaurant-related operations such as creating, reading, updating, and deleting restaurant(Menu) information.
+
 # Project Overview
 ### The Restaurant Web API project provides a backend solution for building restaurant management applications. It leverages the .NET framework and follows the principles of a RESTful API to expose endpoints that can be used to interact with restaurant data.
+
 ### The project includes features such as:
-1. Restaurant CRUD operations: Create, Read, Update, and Delete restaurant information.
+1. Restaurant CRUD operations: Create, Read, Update, and Delete menu information.
+2. Menu management: Add, update, and delete menu items for each menu-item.
+3. User authentication and authorization: Secure endpoints using authentication mechanisms and control access based on user roles.
+4. Data validation: Ensure that data sent to the API is validated and meets the required criteria.
+5. Payment integration(Stripe):  Ensure that client can order and make payment for menu.
+6. Error handling: Properly handle and return meaningful error messages to clients.
+7. API documentation: Provide clear documentation for developers to understand and utilize the API endpoints.
+
+## Technologies Used
+#### The Restaurant Web API project is built using the following technologies:
+. .NET Core
+. ASP.NET Core
+. SQL Server
+. Stripe
+. Entity Framework Core
+. JSON Web Token and Identity
+
+- [https://localhost:7223/swagger/index.html]

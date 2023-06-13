@@ -21,4 +21,4 @@
 . Entity Framework Core
 . JSON Web Token and Identity
 
-- [https://localhost:7223/swagger/index.html]
+- ![Capture 22](https://github.com/fasas1/RellishAPI/assets/47166372/14cfe558-a369-4e6a-926e-1ab3983e6d20)

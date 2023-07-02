@@ -1,7 +1,4 @@
-# Rellish Web API
-
-# Project Overview
-### The Rellish Web API project provides a backend solution for building restaurant management applications. It leverages the .NET framework and follows the principles of a RESTful API to expose endpoints that can be used to interact with restaurant data.
+### RellishWeb API project provides a backend solution for building restaurant management applications. It leverages the .NET framework and follows the principles of a RESTful API to expose endpoints that can be used to interact with restaurant data.
 
 ### The project includes features such as:
 1. Restaurant CRUD operations: Create, Read, Update, and Delete menu information.

@@ -17,7 +17,7 @@
 . Stripe
 . Entity Framework Core
 . JSON Web Token and Identity frmework
-## Screenshot 
+## Image
 - ![Capture 22](https://github.com/fasas1/RellishFood/assets/47166372/cb648c7a-94bc-45a3-a427-fd313df16ead)
 
 # Getting Started

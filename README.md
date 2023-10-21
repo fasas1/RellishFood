@@ -1,6 +1,6 @@
 ### Rellish Web API project provides a backend solution for building restaurant management application. It leverages the .NET framework and follows the principles of a RESTful API to expose endpoints that can be used to interact with restaurant data.
 
-### The project includes features such as:
+### The project includes features such as
 1. Restaurant CRUD operations: Create, Read, Update, and Delete menu information
 2. Menu management: Add, update, and delete menu items for each menu-item.
 3. User authentication and authorization: Secure endpoints using authentication mechanisms and control access based on user roles.

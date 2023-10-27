@@ -6,7 +6,7 @@
 3. User authentication and authorization: Secure endpoints using authentication mechanisms and control access based on user roles.
 4. Data validation: Ensure that data sent to the API is validated and meets the required criteria.
 5. Payment integration(Stripe):  Ensure that client can order and make payment for menu-items.
-6. Error handling: Properly handle and return meaningful error messages to clients
+6. Error handling: Properly handle and return meaningful error messages to clients.
 7. API documentation: Provide clear documentation for developers to understand and utilize the API endpoints.
 
 ## Technologies Used
